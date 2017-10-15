@@ -7,11 +7,10 @@ PLAGUEX 2.0
 
 Objectives:
 
-  Compare two or more documents for Plagiarism in language, thoughts, ideas or expressions:
-  
+  Compare two or more documents for Plagiarism in language, thoughts, ideas or expressions 
       1. Generate a match-score on variable query size (starting from phrase-level to document level) between two documents.
       
-          a. Generate a match-score between two queries:
+          a . Generate a match-score between two queries:
               SUB GOALS:
               i. Process Text ................ DONE
               ii. Create Corpus
