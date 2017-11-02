@@ -6,17 +6,17 @@ doc1 = Tokenizer("Adit and Kaushik are doing the project")
 doc2 = Tokenizer("The work is being done by Adit and Kaushik ")
 class Sem_Eval:
     def __init__(self, Rawtext1, Rawtext2):
-        self.token_text1 = Tokenizer(Rawtext1)
-        self.token_text2 = Tokenizer(Rawtext2)
+        self.text1 = Rawtext1
+        self.text2 = Rawtext2
         self.weightlist = {"NN":1.0, "NNP":1.0, "JJ":0.5, "RB": 0.4, "VB":1.0 }                           
     def compare(self):
         maxmatchlist = []
         maxposlist = []
-        for word1 in self.token_text1.tokenized_text:
+        for word1 in self.text1:
             matchlist = []
             poslist = []
             syn1 = wn.synsets(word1[0])
-            for word2 in self.token_text2.tokenized_text:
+            for word2 in self.text2:
                 syn2 = wn.synsets(word2[0])
                 interlist = list(set(syn1) & set(syn2))
                 if(word1[0]==word2[0]):
@@ -48,8 +48,9 @@ class Sem_Eval:
         print(maxmatchlist)
         print("\n\n")
         print(maxposlist)
-            
-comp1 = Sem_Eval("Adit and Kaushik are doing the project", "The work is being done by Adit and Kaushik ")
+
+           
+comp1 = Sem_Eval(doc1.tokenized_text, doc2.tokenized_text)
 print(doc1.tokenized_text)
 print("\n\n")
 print(doc2.tokenized_text)
