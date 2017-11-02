@@ -1,6 +1,23 @@
 from nltk.corpus import wordnet as wn
 import itertools
 
+
+# Class Features:
+#    Objective: Deeper analyis of the identified text range in between each of the documents and assigning score to each match.
+
+#    ===>       Class Constructor       ====>  input:  query_data: data containing all text range between each of the documents with possible similarity
+#                                              token_data: tokenized text from all documents
+
+#    ===>       get_rawtext()           ====>  To get the original text from the tokenized list of the document.
+
+#    ===>       compare()               ====>  Takes all words within the matched ranges for both documents as input and calculates the maximum direct match
+#                                              score and part of speech score for each word in the document with greater length.                                 
+
+#    ===>       getscore                ====>  Calculates the final score between two matches by giving weightages to match score and pos score and also
+#                                              takes into account the weightage given to different parts of speeches.
+
+
+
 class Sem_Eval:
     def __init__(self, query_data, token_data):
         
