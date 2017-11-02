@@ -17,7 +17,7 @@ import tokenizer
 import random
 from nltk.corpus import wordnet as wn
 class Concept_Corpus:
-    def __init__(self,*nfile):
+    def __init__(self,nfile):
         self.nfiles = nfile
         n_corpus = []
         for file in nfile:
