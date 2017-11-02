@@ -1,5 +1,3 @@
-from tokenizer import Tokenizer
-
 from nltk.corpus import wordnet as wn
 import itertools
 
