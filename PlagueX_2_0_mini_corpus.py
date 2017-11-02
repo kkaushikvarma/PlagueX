@@ -1,6 +1,4 @@
-import concept_corpus
 import itertools
-import tokenizer
 
 
 # Class Features:
