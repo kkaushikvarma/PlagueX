@@ -4,6 +4,24 @@ Siddhant Bhargava, Adit Whorra, Koushik Varma
 
 PLAGUEX 2.0
 
+Dependecies: 
+Python 3.0 or above, NLTK 3.2.5, WordNet 3.1
+
+Installation Instructions: 
+1. Clone current repository
+2. Installing NLTK:
+    a) with Python installed, open CMD in Windows or Terminal in MAC
+    b) execute the following command "pip install nltk"
+3. Installing WordNet: 
+    a) With Python terminal opened on CMD/Terminal/external_IDE
+    b) "import nltk"
+    c) "nltk.download()"
+    d) choose WordNet from list of NLTK libraries
+4. Detecting Plagiarism in a custom set of documents:
+    a) Place any number of documents in the "Test Cases" folder
+    b) Execution may take longer durations of time for more than 30 documents.
+5. Execute "main.py" from CMD/Terminal/External_IDE
+
 
    Objectives:
    
