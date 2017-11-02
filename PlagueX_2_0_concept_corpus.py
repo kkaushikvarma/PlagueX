@@ -13,7 +13,6 @@
 
 
 import itertools
-import tokenizer
 import random
 from nltk.corpus import wordnet as wn
 class Concept_Corpus:
