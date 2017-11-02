@@ -19,14 +19,14 @@ PLAGUEX 2.0
               
               ii. Create Corpus............... DONE (Local Corpus needs to be created)
               
-              iii. Determine weights.
+              iii. Determine weights...........DONE
               
               iv. implement a distance algorithm.
-              Secondary Goals: Try to access WordNet without NLTK as it can save us a lot of computational time 
+              Secondary Goals: Try to access WordNet without NLTK as it can save us a lot of computational time.......SOLVED
               
-            b. Create an algorithm to grow the query size upon matching of the smallest query set
+            b. Create an algorithm to grow the query size upon matching of the smallest query set............TREE_ALGORITHM CREATED
             
-        2. Determine the threshold match-score for the query to be classified as Plagiarised.
+        2. Determine the threshold match-score for the query to be classified as Plagiarised........TO BE DONE USING DATASET AND CLASSIFICATION
 
     
     

@@ -8,7 +8,7 @@
 
 #    ===>       reduced_corpus        ====> clusters similar nouns together in different lists 
 
-#    ===>       freq_distribution     ====> list of different positions a concept exists in each document.
+#    ===>       doc_datagen           ====> generates a variant of each document containing only its concepts
 
 
 

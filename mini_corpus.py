@@ -1,6 +1,26 @@
 import concept_corpus
 import itertools
 import tokenizer
+
+
+# Class Features:
+#    Objective: Identifies a text range in between each of the documents that share similar concepts for deeper analysis.
+
+#    ===>       Class Constructor     ====> input:  doc_data: documents listed by their concept_codes
+#                                                   noun_index: identify positions of specific nouns in the document
+
+#    ===>       match_detect()        ====> identifies the positions at which any two documents use the same concept keyword
+
+#    ===>       match_range()         ====> uses the position given by match_detect() to recursively generate a possible range of texts in each
+#                                            of the documents that might be similar.
+
+#    ===>       mini_queries          ====> Use the outputs of match_range() to locate the corresponding query in each of the two documents
+#                                            that might be declared plagiarised upon further analysis.
+
+
+
+
+
 class Mini_Corpus:
     def __init__(self, doc_data, noun_index):
         self.noun_index = noun_index
@@ -61,20 +81,22 @@ class Mini_Corpus:
             d1 = self.doc_combs[i][0]
             d2 = self.doc_combs[i][1]
             for rangex in comb:
-                newrange = ((self.noun_index[d1][rangex[0][0]],self.noun_index[d1][rangex[1][0]]),(self.noun_index[d2][rangex[0][1]],self.noun_index[d2][rangex[1][1]]))
+                try:
+                    newrange = ((self.noun_index[d1][rangex[0][0]],self.noun_index[d1][rangex[1][0]]),(self.noun_index[d2][rangex[0][1]],self.noun_index[d2][rangex[1][1]]))
+                except:
+                    print(d1,"\n",d2)
+                    print(rangex)
+                    input()
                 comb_queries.append(newrange)
             query_data.append(comb_queries)
         return(query_data)
             
             
             
-            
-#            
-#        
 #        
 #        
 #
-#    
+#Un-comment below text to check code-integrity   
 #Raw_Text = "Along with the degradation of labor, Gandhi believes that capitalism imbues greediness in every human being. The introduction of machinery makes man a limitless consumer of commodities leading to the multiplication of wants and desires. This further leads to unhealthy competition which ultimately results in violence. Therefore, he believes that violence is inherently embedded in the western civilization which promotes capitalism and hence considers capitalism to be immoral, driven only by comforts and bodily welfare"
 #
 #
@@ -88,17 +110,6 @@ class Mini_Corpus:
 #a2 = text2.tokenized_text
 #x = concept_corpus.Concept_Corpus([text1.nounset,text2.nounset])
 #
-#print(a1[3:12])
-#print(a2[7:14])
-#print("")
-#
-#print(a1[21:28])
-#print(a2[21:27])
-#print("")
-#
-#print(a1[55:65])
-#print(a2[69:78])
-#print("")
 #
 #y = Mini_Corpus(x.doc_data,[text1.noun_index,text2.noun_index]) 
 #print(y.match_data)
