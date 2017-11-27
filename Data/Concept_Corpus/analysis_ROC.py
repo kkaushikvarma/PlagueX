@@ -1,4 +1,4 @@
-f=open("Data_lch.txt", 'r')
+f=open("Data_wup.txt", 'r')
 status = 1
 syns = []
 words = []
@@ -12,7 +12,6 @@ while True:
     else:
         if float(data[2:]) != 0.0:
             syns.append(float(data[2:]))
-
 #full_data
 minval = min(min(syns),min(words))
 maxval = max(max(syns),max(words))
@@ -35,6 +34,7 @@ for threshold in full_index:
     
 import numpy as np
 import matplotlib.pyplot as plt
+from numpy import trapz
 fp_list = list(map(lambda tn: 100-tn, tn_list))
 fn_list = list(map(lambda tn: 100-tn, tp_list))
 # Make some fake data.
@@ -46,7 +46,8 @@ ax.plot(fp_list,tp_list, 'c', label='ROC')
 #ax.plot(a, tn_list, 'c:', label='True Negatives')
 #ax.plot(a, fp_list, 'k', label='False Positives')
 #ax.plot(a, fn_list, 'k:', label='False Negatives')
-
+area = trapz(tp_list, dx=1)
+print("Area under the curve = ",area)
 legend = ax.legend(loc='lower left', shadow=True, fontsize='small')
 
 # Put a nicer background color on the legend.
