@@ -1,4 +1,4 @@
-f=open("Data_wup.txt", 'r')
+f=open("Data_path.txt", 'r')
 status = 1
 syns = []
 words = []
