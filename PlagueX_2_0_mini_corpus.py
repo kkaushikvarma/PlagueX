@@ -80,13 +80,22 @@ class Mini_Corpus:
             d1 = self.doc_combs[i][0]
             d2 = self.doc_combs[i][1]
             for rangex in comb:
-                
-                r1 = rangex[0][0]
-                r3 = rangex[0][1]
-
-                r2 = rangex[1][0]
-
-                r4 = rangex[1][1]
+                if rangex[0][0] != 0:
+                    r1 = int(rangex[0][0]) - 1
+                else:
+                    r1 = rangex[0][0]
+                if rangex[0][1] != 0:
+                    r3 = int(rangex[0][1]) - 1
+                else:
+                    r3 = rangex[0][1]
+                if rangex[1][0] < len(self.noun_index[d1])-1:
+                    r2 = int(rangex[1][0]) + 1
+                else:
+                    r2 = rangex[1][0]
+                if rangex[1][1] < len(self.noun_index[d2])-1:
+                    r4 = int(rangex[1][1]) + 1
+                else:
+                    r4 = rangex[1][1]
 
                 try:
                     newrange = ((self.noun_index[d1][r1],self.noun_index[d1][r2]),(self.noun_index[d2][r3],self.noun_index[d2][r4]))
