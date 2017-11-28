@@ -15,6 +15,7 @@
 import itertools
 import random
 from nltk.corpus import wordnet as wn
+import PlagueX_2_0_tokenizer
 class Concept_Corpus:
     def __init__(self,nfile):
         self.nfiles = nfile
@@ -33,20 +34,48 @@ class Concept_Corpus:
             else:
                 self.x_corpus[term]=synset
         #Removes repeated terms
-        self.n_reduced = self.reduced_corpus()
+        self.n_reduced = self.reduced_corpus()+self.y_corpus
         self.con_code = list(range(len(self.n_reduced)))
         self.doc_data = self.doc_datagen()
+        
+    def checksim(self,synset1,synset2):
+        score = 0
+        for syn1 in synset1:
+            for syn2 in synset2:
+                try:
+                    ns = wn.lch_similarity(syn1,syn2)
+                except:
+                    ns = 0
+    #            ns = wn.wup_similarity(syn1,syn2)
+                if isinstance(ns, float):
+                    if ns > score:
+                        score = ns
+
+    
+        return(score)
     def reduced_corpus(self):
-        n_reduced = list()
-        for key1 in self.x_corpus:
-            wordlist = list()
-            for key2 in self.x_corpus:
-                interlist =  list(set(self.x_corpus[key1]) & set(self.x_corpus[key2]))
-                if(len(interlist)>0):
-                    wordlist.append(key2)
-            if(wordlist not in n_reduced):
-                n_reduced.append(wordlist)
-        return(n_reduced+self.y_corpus)
+        n_reduced = []
+        threshold = 2.3
+        for key in self.x_corpus.keys():
+            cflag = 0
+            if n_reduced == []:
+                n_reduced.append([key])
+            else:
+                for c, concept in enumerate(n_reduced):
+                    if cflag == 1:
+                        break
+                    for term in concept:
+                        score = self.checksim(self.x_corpus[key],self.x_corpus[term])
+                        if score > threshold:
+                            current_concept = n_reduced[c]
+                            current_concept.append(key)
+                            n_reduced[c] = current_concept
+                            cflag = 1
+                            break
+                if cflag == 0:
+                    n_reduced.append([key])
+                            
+        return(n_reduced)
     def doc_datagen(self):
         doc_data = []
         for file in self.nfiles:
@@ -64,11 +93,10 @@ class Concept_Corpus:
         
                         
 
-#Raw_Text = "As St.Francis high school dropout myself and now a mother of six children, one kid being a recent high school graduate, one just entering high school, and another soon to enter high school in a year with three others trailing behind, I often find myself reflecting on my high school years. Why was I so unmotivated to finish high school? What made me want to go back to school? The question it all comes down to is, what can be done to prevent high school students from losing motivation, detouring them from dropping out and not becoming just another statistic? Motivating high school students may seem like a daunting task; however, it is easier than we think by encouraging them, helping them acquire their own aspirations, and making school interesting. Students will not only meet graduation requirements, but they will feel a sense of accomplishment while doing it."
-#text1 = tokenizer.Tokenizer(Raw_Text)
-#x = Concept_Corpus(text1.nounset,text1.nounset)
+#Raw_Text = "The ducks swim in the lake close to my home. There is a pond near my house, where the ducks swim. There is a lake close to my house, where the ducks swim."
+#text1 = PlagueX_2_0_tokenizer.Tokenizer(Raw_Text)
+#x = Concept_Corpus([text1.nounset,text1.nounset])
 #print(x.n_reduced)
 #print(x.con_code)
 #print(x.doc_data)
-#
 

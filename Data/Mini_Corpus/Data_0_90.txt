@@ -1,9 +1,9 @@
-01. The ducks swim in the pond near my house.
+﻿01. The ducks swim in the pond near my house.
 The ducks swim in the lake close to my home
 There is a pond near my house, where the ducks swim.
 There is a lake close to my house, where the ducks swim.
 
-02.Sue changed the flat tire
+02. Sue changed the flat tire
 Sue replaced the deflated tyre
 The flat tire was changed by Sue.
 The deflated tyre was replaced by Sue
@@ -352,6 +352,7 @@ Many people with kind souls adopted young dogs
 My house’s internet was out of work for many days.
 The wifi at my house did not work for a lot of days.
 My home internet didn’t work for many days.
+
 72. The older citizens were honoured with a parade for those once in the military.
 Senior citizens were honoured with a march for veterans.
 Older veterans were honoured with a parade.
@@ -426,7 +427,8 @@ Candles flickered from many areas of the large room.
 The spacious room contained many burning candles.
 The big room was lit up with many candles.
 
-87. In ancient times the olive branch was used as a peace symbol, as well as the dove. Many centuries ago, peace was shown with an olive branch and a dove. 
+87. In ancient times the olive branch was used as a peace symbol, as well as the dove.
+Many centuries ago, peace was shown with an olive branch and a dove. 
 Multiple centuries back, people used doves and an olive branch to show peace.
 Peace was shown through a dove and an olive branch many centuries ago.
 
@@ -439,18 +441,18 @@ The storm could be predicted by the dark clouds.
 The news depressed him.
 The news that he was told made him sad.
 When the news reached him, he went into depression.
+END
+END
+END
+END
+END
+END
+END
+END
+END
 
 90. The still waters of the Caribbean were teal in colour. 
 The turquoise Caribbean waters were calm.
 There is calm and turquoise water in the Caribbean.
 The Caribbean contains calm and teal water.
-
-
-
-
-
-
-
-
-
 

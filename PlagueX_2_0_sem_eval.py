@@ -29,6 +29,8 @@ class Sem_Eval:
             for match in comb:
                 text1 = token_data[self.doc_combs[index][0]][match[0][0]:match[0][1]]
                 text2 = token_data[self.doc_combs[index][1]][match[1][0]:match[1][1]]
+                if len(text1) < 4 or len(text2) < 4:
+                    continue
                 if len(text1) > len(text2):
                     text1,text2 = text2,text1
                 score = self.getscore(text1,text2)
@@ -37,48 +39,65 @@ class Sem_Eval:
             self.score_data.append(comb_scores)
     def get_rawtext(self,text):
         return(" ".join(list(map(lambda token: token[0],text))))
-    def getscore(self,text1,text2):
-        if len(text1) < 4 or len(text2) < 4:
-            return(0)
-        score_data = self.compare(text1,text2)
-        raw_scores = list(map(lambda score: (score[0]*0.6)+(score[1]*0.4)*score[2],score_data))
-        normalization = list(map(lambda score:score[2],score_data))
-        
-        return(sum(raw_scores)/sum(normalization))
-        
-    def compare(self,text1,text2):
-        weightlist = {"NN":1.0, "JJ":0.8, "RB": 0.8, "VB":0.7 } 
-        score_data = []
-        for word1 in text1:
-            try:
-                pos_priority = weightlist[word1[1][:2]]
-            except:
-                pos_priority = 0.4
-            matchlist = []
-            poslist = []
-            syn1 = wn.synsets(word1[0])
+    
+    def checksim(self,synset1,synset2):
+        score = 0
+        for syn1 in synset1:
+            for syn2 in synset2:
+                try:
+                    ns = wn.lch_similarity(syn1,syn2)
+                except:
+                    ns = 0
+    #            ns = wn.wup_similarity(syn1,syn2)
+                if isinstance(ns, float):
+                    if ns > score:
+                        score = ns
+
+
+        return(score)
+
+    def getweight(self,pos):
+        weightlist = {"NN":0.77, "JJ":0.88, "RB": 0.76, "VB":0.90, "PR":0.30, "IN":0.30,"CC":0.30}
+        if "NNP" in pos:
+            return(1.0)
+        elif pos[:2] in list(weightlist.keys()):
+            return(weightlist[pos[:2]])
+        else:
+            return(0.1)
+
+    def scoregen(self,text1,text2):
+
+        available_1 = text1
+        available_2 = text2
+        scores = []
+        pairs = []
+        for word in text1:
+            max_score = 0
             for word2 in text2:
-                syn2 = wn.synsets(word2[0])
-                interlist = list(set(syn1) & set(syn2))
-                if(word1[0]==word2[0]):
-                    matchlist.append(1)
-                elif(len(interlist)>0):
-                    matchlist.append(1)
-                else:
-                    matchlist.append(0)
-                if(word1[1]==word2[1]):
-                    poslist.append(1)
-                elif(word1[1][:2] == "VB" and word2[1][:2] == "VB"):
-                    poslist.append(0.7)
-                elif(word1[1][:2] == "NN" and word2[1][:2] == "NN"):
-                    poslist.append(0.7)
-                elif(word1[1][:2] == "JJ" and word2[1][:2] == "JJ"):
-                    poslist.append(0.7)
-                elif(word1[1][:2] == "RB" and word2[1][:2] == "RB"):
-                    poslist.append(0.7)
-                else:
-                    poslist.append(0.0)
-            score_data.append((max(matchlist),max(poslist), pos_priority ))
-        return(score_data)
+                try:
+                    score = self.checksim(wn.synsets(word[0]),wn.synsets(word2[0]))
+                    score = score/3.63
+                    if score > 1:
+                        score = 1
+                except:
+                    if word == word2:
+                        score = 1
+                    else:
+                        score = 0
+                if score == 0 and word == word2:
+                    score = 1
+                if score > max_score:
+                    max_score = score
+
+            scores.append((max_score,self.getweight(word[1]),word))
+        return(scores)
+
+    def getscore(self,text1,text2):
+        score_data = self.scoregen(text1,text2)
+    #    print(score_data)
+    #    input()
+        scores = list(map(lambda term: term[0]*term[1], score_data))
+        weightlist = list(map(lambda term: term[1],score_data))
+        return(round(sum(scores)/sum(weightlist),2))
 
 

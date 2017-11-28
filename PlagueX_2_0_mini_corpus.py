@@ -1,5 +1,6 @@
 import itertools
-
+import PlagueX_2_0_tokenizer
+import PlagueX_2_0_concept_corpus
 
 # Class Features:
 #    Objective: Identifies a text range in between each of the documents that share similar concepts for deeper analysis.
@@ -79,8 +80,16 @@ class Mini_Corpus:
             d1 = self.doc_combs[i][0]
             d2 = self.doc_combs[i][1]
             for rangex in comb:
+                
+                r1 = rangex[0][0]
+                r3 = rangex[0][1]
+
+                r2 = rangex[1][0]
+
+                r4 = rangex[1][1]
+
                 try:
-                    newrange = ((self.noun_index[d1][rangex[0][0]],self.noun_index[d1][rangex[1][0]]),(self.noun_index[d2][rangex[0][1]],self.noun_index[d2][rangex[1][1]]))
+                    newrange = ((self.noun_index[d1][r1],self.noun_index[d1][r2]),(self.noun_index[d2][r3],self.noun_index[d2][r4]))
                 except:
                     print(d1,"\n",d2)
                     print(rangex)
@@ -91,9 +100,9 @@ class Mini_Corpus:
             
             
             
-#        
-#        
-#
+        
+        
+
 #Un-comment below text to check code-integrity   
 #Raw_Text = "Along with the degradation of labor, Gandhi believes that capitalism imbues greediness in every human being. The introduction of machinery makes man a limitless consumer of commodities leading to the multiplication of wants and desires. This further leads to unhealthy competition which ultimately results in violence. Therefore, he believes that violence is inherently embedded in the western civilization which promotes capitalism and hence considers capitalism to be immoral, driven only by comforts and bodily welfare"
 #
@@ -101,16 +110,16 @@ class Mini_Corpus:
 #Raw_Text2 = "According to Gandhi's beliefs, alongside degradation of labor, capitalism also permeates greediness in all humans. Induction to machinery makes humans boundless users of commodities which results in growth of needs and desires. Further, this results in unhealthy competition which eventually leads to brutality. Thus, he concludes that capitalism is unethical and is driven just by comfort and personal well being as violence is innately implanted in western ideologies which promotes capitalism "
 #
 #
-#text1 = tokenizer.Tokenizer(Raw_Text)
-#text2 = tokenizer.Tokenizer(Raw_Text2)
+#text1 = PlagueX_2_0_tokenizer.Tokenizer(Raw_Text)
+#text2 = PlagueX_2_0_tokenizer.Tokenizer(Raw_Text2)
 #
 #a1 = text1.tokenized_text
 #a2 = text2.tokenized_text
-#x = concept_corpus.Concept_Corpus([text1.nounset,text2.nounset])
-#
+#x = PlagueX_2_0_concept_corpus.Concept_Corpus([text1.nounset,text2.nounset])
 #
 #y = Mini_Corpus(x.doc_data,[text1.noun_index,text2.noun_index]) 
 #print(y.match_data)
+#print("hey")
 #print(y.query_data)
-
+#
 
