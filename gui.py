@@ -181,7 +181,39 @@ class Gui:
             window.destroy()
             self.page2(E1.get(),E2.get(),E3.get(),E4.get())
             
-        
+        def hood():
+            top = Toplevel()
+            top.title("Data Analysis")
+            main_frame = Frame(top, width = 600, height = 800)
+            header = Frame(main_frame, width = 600, height = 70, bg = "#c0392b")
+            header.pack_propagate(0)
+            header.pack(side = "top")
+            load = Image.open("logo.png")
+            render = ImageTk.PhotoImage(load)
+
+                # labels can be text or images
+            img = Label(header, image=render, borderwidth = 0, highlightthickness =0)
+            img.image = render
+            img.place(x=0, y=0)
+
+            var1 = IntVar()
+            data_frame = Frame(main_frame, bg = "#ecf0f1", pady = 200)
+            data_frame.pack(side = "top")
+            R1 = Radiobutton(data_frame, text="From folder '/TestCases'", variable=var1, value=1,bg = "#ecf0f1", fg = "#2c3e50", font = ("Helvetica 10 bold"))
+            R1.invoke()
+            R1.select()
+            R1.pack(side = "top")
+
+            footer = Frame(main_frame, width = 600, height = 70, bg = "#ecf0f1")
+#            button1 = Button(footer, text = "Under the Hood", width = 20, bg = "#c0392b", fg = "#ecf0f1", font = ("Helvetica 13 bold") , pady = 8, command = hood)
+#            button1.pack(side = "left")
+#            button2 = Button(footer, text = "Get Results", width = 20, bg = "#c0392b", fg = "#ecf0f1", font = ("Helvetica 13 bold") ,pady = 8, command = hood )
+#            button2.pack(side = "right")
+            footer.pack_propagate(0)
+            footer.pack(side = "bottom")
+            main_frame.pack_propagate(0)
+            main_frame.pack()
+
         
         footer = Frame(main_frame, width = 600, height = 170, bg = "#c0392b")
         footer.pack_propagate(0)
@@ -190,7 +222,7 @@ class Gui:
         nfooter.pack(anchor = "n")
         mfooter = Frame(footer, bg = "#c0392b")
         mfooter.pack(anchor = "n")
-        button1 = Button(mfooter, text = "Under the Hood", width = 20, bg = "#c0392b", fg = "#ecf0f1", font = ("Helvetica 12 bold") , pady = 8, command = next)
+        button1 = Button(mfooter, text = "Under the Hood", width = 20, bg = "#c0392b", fg = "#ecf0f1", font = ("Helvetica 12 bold") , pady = 8, command = hood)
         button1.pack(side = "left", padx = 5)
         button2 = Button(mfooter, text = "Next", width = 10, bg = "#c0392b", fg = "#ecf0f1", font = ("Helvetica 13 bold") ,pady = 8, command = next )
         button2.pack(side = "right", padx = 5)
