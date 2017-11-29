@@ -69,6 +69,7 @@ class Mini_Corpus:
                 rangex = range_gen(elmx,match_data)
                 if len(rangex) >1:
                     match_ranges.append((rangex[0],rangex[-1]))
+        print(match_ranges)
         return(match_ranges)
     
     

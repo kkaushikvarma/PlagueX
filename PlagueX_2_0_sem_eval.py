@@ -27,8 +27,17 @@ class Sem_Eval:
         for index, comb  in enumerate(query_data):
             comb_scores = []
             for match in comb:
-                text1 = token_data[self.doc_combs[index][0]][match[0][0]:match[0][1]]
-                text2 = token_data[self.doc_combs[index][1]][match[1][0]:match[1][1]]
+                try:
+                    text1 = token_data[self.doc_combs[index][0]][match[0][0]:match[0][1]+1]
+                except:
+                    print("d")
+                    text1 = token_data[self.doc_combs[index][0]][match[0][0]:match[0][1]]
+                try:
+                    text2 = token_data[self.doc_combs[index][1]][match[1][0]:match[1][1]+1]
+                except:
+                    print("d")
+                    text2 = token_data[self.doc_combs[index][1]][match[1][0]:match[1][1]]
+                
                 if len(text1) < 4 or len(text2) < 4:
                     continue
                 if len(text1) > len(text2):
@@ -98,6 +107,11 @@ class Sem_Eval:
     #    input()
         scores = list(map(lambda term: term[0]*term[1], score_data))
         weightlist = list(map(lambda term: term[1],score_data))
-        return(round(sum(scores)/sum(weightlist),2))
+        text2_weight = sum(map(lambda pos: self.getweight(pos), list(map(lambda term: term[1],text2))))
+        text1_weight = sum(weightlist)
+        weight = (text2_weight+text1_weight)/2
+            
+        
+        return(round(sum(scores)/weight,2))
 
 

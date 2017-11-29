@@ -87,16 +87,15 @@ preps_idf = idf_gen(preps)
 #verbs_idf = statistics.median(verbs)
 #preps_idf = statistics.median(preps)
 #
+idf_list = [noun_idf,pnoun_idf,adjectives_idf,adverbs_idf,verbs_idf,preps_idf]
+idf_list = list(map(lambda idfterm: ((idfterm - min(idf_list))/(max(idf_list)-min(idf_list))*0.7)+0.3,idf_list))
 
 
-print(nouns)
-print(adjectives)
-print(adverbs)
-print(verbs)
-print(noun_idf)
-print(pnoun_idf)
-print(adjectives_idf)
-print(adverbs_idf)
-print(verbs_idf)
-print(preps_idf)
-    
+#print(noun_idf)
+#print(pnoun_idf)
+#print(adjectives_idf)
+#print(adverbs_idf)
+#print(verbs_idf)
+#print(preps_idf)
+
+print(idf_list)
