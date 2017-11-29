@@ -2,10 +2,7 @@
 Detections between 'text 0' and 'text 1':
 ====================================================================================================
 
-	A: 	'Children are playing in school'
-	B: 	'kids are playing in college'
-	Score:	0.94
-
+		No Detections
 
 
 
