@@ -9,14 +9,38 @@ import sys
 raw_text = []
 filenames = []
 
-def main():
+def main(input_type, data):
     
-    for infile in glob.glob( os.path.join('Test Cases/', '*.txt') ):
-        f=open(infile, 'r')
-        filenames.append(infile)
-        raw_text.append(f.read())
+    
+    if input_type == 1:
+        
+        print(data)
+        for infile in os.listdir(data):
+            path = str(data)+"/"+str(infile)
+            f=open(path, 'r')
+            filenames.append(infile)
+            raw_text.append(f.read())
+        print(raw_text)
+        file_combs = list(itertools.combinations(range(len(raw_text)), 2))
+    if input_type == 2:
+        for doc in data:
+            f=open(doc, 'r')
+            filenames.append(doc)
+            raw_text.append(f.read())
+        docs = len(data)
+        file_combs = list(map(lambda index: (0,index),list(range(1,docs))))
+    if input_type == 3:
+        print(data)
+        for i, text in enumerate(data):
+            print(text)
+            filenames.append("text %d" % i)
+            raw_text.append(text)
+            print(raw_text)
 
-    file_combs =            list(itertools.combinations(range(len(raw_text)), 2))
+        file_combs = list(itertools.combinations(range(len(raw_text)), 2))
+
+
+
     tokenized_objects =     list(map(lambda text: PlagueX_2_0_tokenizer.Tokenizer(text),raw_text))
 
 

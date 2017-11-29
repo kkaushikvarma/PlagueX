@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import filedialog
 from PIL import Image, ImageTk
 import nltk
 from nltk.corpus import wordnet as wn
@@ -10,7 +11,7 @@ import os
 class Gui:
         
     def page1(self):
-        
+        self.inputfiles = []
         window = Tk()
         main_frame = Frame(window, width = 600, height = 800)
         header = Frame(main_frame, width = 600, height = 70, bg = "#c0392b")
@@ -25,29 +26,93 @@ class Gui:
         img.place(x=0, y=0)
 
         var1 = IntVar()
+        var1.set(1)
+        
+        
+        
         data_frame = Frame(main_frame, bg = "#ecf0f1", pady = 200)
         data_frame.pack(side = "top")
-        R1 = Radiobutton(data_frame, text="From folder '/TestCases'", variable=var1, value=1,bg = "#ecf0f1", fg = "#2c3e50", font = ("Helvetica 10 bold"))
-        R1.invoke()
-        R1.select()
-        R1.pack(side = "top")
 
-        R2 = Radiobutton(data_frame, text="Custom Text:", variable=var1, value=2,bg = "#ecf0f1", fg = "#2c3e50", font = ("Helvetica 10 bold"))
+        
+        
         E1 = Entry(data_frame)
         E2 = Entry(data_frame)
         E3 = Entry(data_frame)
         E4 = Entry(data_frame)
-        R2.pack(side = "top")
-        E1.pack(side = "top")
-        E2.pack(side = "top")
-        E3.pack(side = "top")
-        E4.pack(side = "top")
+        self.input_1 = ""
+        self.input_2 = ""
+        self.input_3 = ""
+        
+        def a1():
+            self.input_1 = str(filedialog.askdirectory(initialdir = "D:\\CS\\px\\Test Cases\\", parent=window,title='Choose Folder'))
+            print(self.input_1)
+            
+        def a2():
+            self.input_2 = ((str(filedialog.askopenfilename(initialdir = "D:\\CS\\px\\Test Cases\\", parent=window,title='Choose a file'))),)
+            print(self.input_2)
+        def a3():
+            self.input_3 = filedialog.askopenfilenames(initialdir = "D:\\CS\\px\\Test Cases\\", parent=window,title='Choose files')
+            print(self.input_3)
+            
+        button_1 = Button(data_frame, text = "Select Folder", fg = "#2c3e50", bg = "#ecf0f1", font = ("Helvetica 9 bold"), command =a1 , width = 22)
+        button_2 = Button(data_frame, text = "Select Query", fg = "#2c3e50", bg = "#ecf0f1", font = ("Helvetica 9 bold"), command =a2 )
+        button_3 = Button(data_frame, text = "Select Data", fg = "#2c3e50", bg = "#ecf0f1", font = ("Helvetica 9 bold"), command =a3 ) 
+        def b1():
+            button_1['state'] = "normal"
+            button_2['state'] = "disabled"
+            button_3['state'] = "disabled"
+            E1['state'] = "disabled"
+            E2['state'] = "disabled"
+            E3['state'] = "disabled"
+            E4['state'] = "disabled"
+        def b2():
+            button_1['state'] = "disabled"
+            button_2['state'] = "normal"
+            button_3['state'] = "normal"
+            E1['state'] = "disabled"
+            E2['state'] = "disabled"
+            E3['state'] = "disabled"
+            E4['state'] = "disabled"
+        def b3():
+            button_1['state'] = "disabled"
+            button_2['state'] = "disabled"
+            button_3['state'] = "disabled"
+            E1['state'] = "normal"
+            E2['state'] = "normal"
+            E3['state'] = "normal"
+            E4['state'] = "normal"
+        R1 = Radiobutton(data_frame, text="All Documents in: ", variable=var1, value=1,bg = "#ecf0f1", fg = "#2c3e50", font = ("Helvetica 10 bold"), command = b1)
+        R1.invoke()
+        R1.select()
+        R1.grid(row = 0, column = 0, sticky = W)
+ 
+        R2 = Radiobutton(data_frame, text="Test Cases:", variable=var1, value=2,bg = "#ecf0f1", fg = "#2c3e50", font = ("Helvetica 10 bold"), command = b2)
+        R2.grid(row = 1, column = 0, sticky = W)
+
+        R3 = Radiobutton(data_frame, text="Custom Text:", variable=var1, value=3,bg = "#ecf0f1", fg = "#2c3e50", font = ("Helvetica 10 bold"), command = b3)
+        
+        
+        
+        button_1.grid(row = 0, column = 1, columnspan = 2, sticky = W , pady = 5, padx = 2)
+        button_2.grid(row = 1, column = 1, sticky = W , pady = 5, padx = 2)
+        button_3.grid(row = 1, column = 2, sticky = W , pady = 5, padx = 2)
+        R3.grid(row = 2, column = 0 , sticky = W)
+        E1.grid(row = 2, column = 1, columnspan = 2 , sticky = W , pady = 5, padx = 2)
+        E2.grid(row = 3, column = 1, columnspan = 2 , sticky = W , pady = 5, padx = 2)
+        E3.grid(row = 4, column = 1, columnspan = 2 , sticky = W , pady = 5, padx = 2)
+        E4.grid(row = 5, column = 1, columnspan = 2 , sticky = W , pady = 5, padx = 2)
         def process():
-            if var1 == 1:
-                PlagueX_2_0_main.main()
-            else:
-                PlagueX_2_0_main_custom.main(E1.get(),E2.get(),E3.get(),E4.get())
-#            webbrowser.open_new("output.txt")
+            print(var1.get())
+            print(self.input_1)
+            print(self.input_2)
+            print(self.input_3)
+            if var1.get() == 1:
+                self.data = PlagueX_2_0_main.main(1,self.input_1)
+            if var1.get() == 2:
+                self.data = PlagueX_2_0_main.main(2,self.input_2+self.input_3)
+            if var1.get() == 3:
+                self.data = PlagueX_2_0_main.main(3,(E1.get(),E2.get(),E3.get(),E4.get()))
+            webbrowser.open_new("output.txt")
         def hood():
             data = PlagueX_2_0_main_custom.main(E1.get(),E2.get(),E3.get(),E4.get())
             self.tokens = data[0]
