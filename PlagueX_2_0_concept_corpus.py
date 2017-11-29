@@ -55,23 +55,23 @@ class Concept_Corpus:
         return(score)
     def reduced_corpus(self):
         n_reduced = []
-        threshold = 2.3
+        threshold = 2.029
         for key in self.x_corpus.keys():
             cflag = 0
             if n_reduced == []:
                 n_reduced.append([key])
             else:
                 for c, concept in enumerate(n_reduced):
-                    if cflag == 1:
-                        break
+                    eflag = 1
                     for term in concept:
-                        score = self.checksim(self.x_corpus[key],self.x_corpus[term])
-                        if score > threshold:
-                            current_concept = n_reduced[c]
-                            current_concept.append(key)
-                            n_reduced[c] = current_concept
-                            cflag = 1
-                            break
+                        if self.checksim(self.x_corpus[key],self.x_corpus[term]) < threshold:
+                            eflag = 0
+                    if eflag ==1:
+                        current_concept = n_reduced[c]
+                        current_concept.append(key)
+                        n_reduced[c] = current_concept
+                        cflag = 1
+                        break
                 if cflag == 0:
                     n_reduced.append([key])
                             

@@ -88,14 +88,19 @@ class Gui:
         img.place(x=0, y=0)
 
         var1 = IntVar()
-        data_frame = Frame(main_frame, bg = "#ecf0f1", pady = 5)
+        data_frame = Frame(main_frame, bg = "#ecf0f1", pady = 5, width = 600,height = 500)
+        data_frame.pack_propagate(0)
         data_frame.pack(side = "top")
+        
+        next_frame = Frame(main_frame, bg = "#ecf0f1", pady = 2 )
+        next_frame.pack(side = "top")
+        
         
         label1 = Label (data_frame, text = "Tokenized Text", width = 20, bg = "#c0392b", fg = "#ecf0f1",relief = "groove", font = ("Helvetica 14 bold"))
         label1.pack(anchor = "nw")
-        label2 = Label (data_frame, text = str(self.d1), bg = "#ecf0f1", fg = "#2c3e50", font = ("Helvetica 12 bold"))
+        label2 = Label (data_frame, text = str(self.d1), wraplength = 500, bg = "#ecf0f1", fg = "#2c3e50", font = ("Helvetica 11 bold"))
         label2.pack(anchor = "nw",pady = 10)
-        text1 = Label (data_frame, text = str(self.tokens[0]), bg = "#ecf0f1", fg = "#34495e", font = ("Helvetica 9"))
+        text1 = Label (data_frame, text = str(self.tokens[0]),wraplength = 500, bg = "#ecf0f1", fg = "#34495e", font = ("Helvetica 9"))
         text1.pack(anchor = "nw",pady = 3)
         label3 = Label (data_frame, text = str(self.d2), bg = "#ecf0f1", fg = "#2c3e50", font = ("Helvetica 12 bold"))
         label3.pack(anchor = "nw",pady = 10)
@@ -119,10 +124,13 @@ class Gui:
         footer = Frame(main_frame, width = 600, height = 120, bg = "#c0392b")
         footer.pack_propagate(0)
         footer.pack(side = "bottom", pady = 8)
-        button2 = Button(main_frame, text = "NEXT", width = 8, bg = "#c0392b", fg = "#ecf0f1", font = ("Helvetica 13 bold") , pady = 6, command = next)
-        button2.pack(side = "bottom", pady =8)
+        
         inspectlabel = Label(footer, text = "Inspect Integrity:", width = 20, bg = "#c0392b", fg = "#ecf0f1", font = ("Helvetica 13 bold") , pady = 8)
         inspectlabel.pack(anchor = "nw")
+        
+        button2 = Button(next_frame, text = "NEXT", width = 8, bd = 5, bg = "#c0392b", fg = "#ecf0f1", font = ("Helvetica 12 bold") , command = next)
+        button2.pack(anchor = "center", pady =8)
+        
         E1 = Entry(footer)
         E1.pack(anchor = "center")
         ttext = StringVar()
@@ -135,7 +143,8 @@ class Gui:
         button2.pack(anchor = "center", pady = 4)
         text4 = Label (footer, textvariable = ttext, bg = "#c0392b", fg = "#ecf0f1", font = ("Helvetica 9"))
         text4.pack(anchor = "center",pady = 3)
-
+        
+        
         
         main_frame.pack_propagate(0)
         main_frame.pack()
@@ -252,7 +261,7 @@ class Gui:
         button1.pack(side = "left", padx = 5)
         button2 = Button(mfooter, text = "Next", width = 10, bg = "#c0392b", fg = "#ecf0f1", font = ("Helvetica 13 bold") ,pady = 8, command = next )
         button2.pack(side = "right", padx = 5)
-        inspectlabel = Label(nfooter, text = "Inspect Integrity: (Threshold = 2.02)", width = 30, bg = "#c0392b", fg = "#ecf0f1", font = ("Helvetica 11 bold") , pady = 8)
+        inspectlabel = Label(nfooter, text = "Inspect Integrity: (Threshold = 2.029)", width = 30, bg = "#c0392b", fg = "#ecf0f1", font = ("Helvetica 11 bold") , pady = 8)
         inspectlabel.pack(anchor = "nw")
         E1 = Entry(nfooter)
         E1.pack(anchor = "center")
@@ -360,7 +369,10 @@ class Gui:
                 try:
                     mainstring+=str(score[0])
                     mainstring+="\n"
+                    mainstring+="\n"
                     mainstring+=str(score[1])
+                    mainstring+="\n"
+                    mainstring+="\n"
                     mainstring+="\n"
                     mainstring+="\n"
                 except:
@@ -414,9 +426,12 @@ class Gui:
                 try:
                     mainstring+=str(score[0])
                     mainstring+="\n"
+                    mainstring+="\n"
                     mainstring+=str(score[1])
                     mainstring+="\n"
                     mainstring+=str(score[2])
+                    mainstring+="\n"
+                    mainstring+="\n"
                     mainstring+="\n"
                     mainstring+="\n"
                 except:

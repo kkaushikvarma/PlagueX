@@ -5,6 +5,7 @@ import PlagueX_2_0_concept_corpus
 import PlagueX_2_0_mini_corpus
 import PlagueX_2_0_sem_eval
 import itertools
+import sys
 raw_text = []
 filenames = []
 
@@ -17,13 +18,30 @@ def main():
 
     file_combs =            list(itertools.combinations(range(len(raw_text)), 2))
     tokenized_objects =     list(map(lambda text: PlagueX_2_0_tokenizer.Tokenizer(text),raw_text))
+
+
     token_data =            list(map(lambda token_object: token_object.tokenized_text, tokenized_objects ))
     nounset_list =          list(map(lambda token_object: token_object.nounset, tokenized_objects ))
+
+    sys.stdout.flush()
+    print("1/4: \tTokenizing Data..... DONE \r" )
+    sys.stdout.write("2/4: \tGenerating Concept Corpus..... \r" )
+
     noun_indices =          list(map(lambda token_object: token_object.noun_index, tokenized_objects ))
     primary_corpus = PlagueX_2_0_concept_corpus.Concept_Corpus(nounset_list)
+    sys.stdout.flush()
+    print("2/4: \tGenerating Concept Corpus..... DONE \r" )
+    sys.stdout.write("3/4: \tGenerating Queries..... \r" )
+
     secodary_corpus = PlagueX_2_0_mini_corpus.Mini_Corpus(primary_corpus.doc_data,noun_indices)
+    sys.stdout.flush()
+    print("3/4: \tGenerating Queries..... DONE \r" )
+    sys.stdout.write("4/4: \tSemantic Evalutation..... \r" )
+
     semantic_evaluation = PlagueX_2_0_sem_eval.Sem_Eval(secodary_corpus.query_data,token_data)
     final_scores = semantic_evaluation.score_data
+    
+
 
 
 
@@ -56,7 +74,8 @@ def main():
 
     f.close()
 
-
+    sys.stdout.flush()
+    print("4/4: \tSemantic Evalutation..... DONE \r" )
 
 
 

@@ -30,12 +30,10 @@ class Sem_Eval:
                 try:
                     text1 = token_data[self.doc_combs[index][0]][match[0][0]:match[0][1]+1]
                 except:
-                    print("d")
                     text1 = token_data[self.doc_combs[index][0]][match[0][0]:match[0][1]]
                 try:
                     text2 = token_data[self.doc_combs[index][1]][match[1][0]:match[1][1]+1]
                 except:
-                    print("d")
                     text2 = token_data[self.doc_combs[index][1]][match[1][0]:match[1][1]]
                 
                 if len(text1) < 4 or len(text2) < 4:
@@ -75,6 +73,7 @@ class Sem_Eval:
             return(0.1)
 
     def scoregen(self,text1,text2):
+        
 
         available_1 = text1
         available_2 = text2

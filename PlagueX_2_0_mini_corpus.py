@@ -69,7 +69,6 @@ class Mini_Corpus:
                 rangex = range_gen(elmx,match_data)
                 if len(rangex) >1:
                     match_ranges.append((rangex[0],rangex[-1]))
-        print(match_ranges)
         return(match_ranges)
     
     
@@ -102,8 +101,6 @@ class Mini_Corpus:
                     newrange = ((self.noun_index[d1][r1],self.noun_index[d1][r2]),(self.noun_index[d2][r3],self.noun_index[d2][r4]))
                 except:
                     print(d1,"\n",d2)
-                    print(rangex)
-                    input()
                 comb_queries.append(newrange)
             query_data.append(comb_queries)
         return(query_data)
