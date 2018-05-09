@@ -1,5 +1,5 @@
-# CS309-IR-Monsoon-2017-Brogrammers
-Siddhant Bhargava, Adit Whorra, Koushik Varma 
+# PlagueX - Laten-Semantic Analysis based plagiarism detector
+by Koushik Varma 
 
 
 PLAGUEX 2.0
