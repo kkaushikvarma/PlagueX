@@ -1,4 +1,4 @@
-# PlagueX - Laten-Semantic Analysis based plagiarism detector
+# PlagueX - Latent-Semantic Analysis based plagiarism detector
 by Koushik Varma 
 
 
